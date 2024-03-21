@@ -4,6 +4,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "DarkBrim/Core.h"
+
 // Window Settings
 const unsigned int WINDOW_WIDTH  = 800;
 const unsigned int WINDOW_HEIGHT = 600;
@@ -160,6 +162,11 @@ int main()
   glBindVertexArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+  // Version Info
+  dkb_printEngineInfo();
+  printf("\n");
+  dkb_printVersionInfo();
 
   // Main Loop
   while (!glfwWindowShouldClose(window))

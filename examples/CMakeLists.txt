@@ -5,4 +5,7 @@ add_executable(
 )
 
 # Libraries
-target_link_libraries(darkbrim PRIVATE GL GLEW glfw)
+target_link_libraries(darkbrim PRIVATE DarkBrim GL GLEW glfw)
+
+# Include Directory
+target_include_directories(darkbrim PRIVATE ${CMAKE_SOURCE_DIR}/include)

@@ -10,6 +10,7 @@ project(${PROJECT_NAME})
 
 # Subdirectories
 add_subdirectory(examples)
+add_subdirectory(src)
 
 # Packages
 find_package(OpenGL REQUIRED)
