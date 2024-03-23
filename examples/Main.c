@@ -140,24 +140,22 @@ int main()
   glDeleteShader(fragmentShader);
 
   // VAO, VBO, and EBO
-  GLuint VAO;
+  dkb_VAO VAO;
   dkb_VBO VBO;
   dkb_EBO EBO;
 
-  glGenVertexArrays(1, &VAO);
+  dkb_initVAO(&VAO);
   dkb_initVBO(&VBO, vertices, sizeof(vertices));
   dkb_initEBO(&EBO, indices, sizeof(indices));
 
-  glBindVertexArray(VAO);
+  dkb_bindVAO(&VAO);
   dkb_bindVBO(&VBO);
   dkb_bindEBO(&EBO);
 
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-  glEnableVertexAttribArray(1);
+  dkb_linkAttribute(&VBO, 0, 3, GL_FLOAT, 6 * sizeof(GLfloat), (void*)0);
+  dkb_linkAttribute(&VBO, 1, 3, GL_FLOAT, 6 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 
-  glBindVertexArray(0);
+  dkb_unbindVAO();
   dkb_unbindVBO();
   dkb_unbindEBO();
 
@@ -178,12 +176,13 @@ int main()
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(shaderProgram);
-    glBindVertexArray(VAO);
+    dkb_bindVAO(&VAO);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);
     glfwSwapBuffers(window);
   }
 
   // Termination
+  dkb_deleteVAO(&VAO);
   dkb_deleteVBO(&VBO);
   dkb_deleteEBO(&EBO);
   glDeleteProgram(shaderProgram);

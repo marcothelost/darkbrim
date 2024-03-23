@@ -34,3 +34,19 @@ void dkb_unbindEBO()
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 void dkb_deleteEBO(dkb_EBO* EBO)
 { glDeleteBuffers(1, &EBO->ID); }
+
+void dkb_initVAO(dkb_VAO* VAO)
+{ glGenVertexArrays(1, &VAO->ID); }
+void dkb_bindVAO(dkb_VAO* VAO)
+{ glBindVertexArray(VAO->ID); }
+void dkb_unbindVAO()
+{ glBindVertexArray(0); }
+void dkb_deleteVAO(dkb_VAO* VAO)
+{ glDeleteVertexArrays(1, &VAO->ID); }
+void dkb_linkAttribute(dkb_VBO* VBO, GLuint layout, GLuint size, GLenum type, GLsizeiptr stride, const void* offset)
+{
+  dkb_bindVBO(VBO);
+  glVertexAttribPointer(layout, size, type, GL_FALSE, stride, offset);
+  glEnableVertexAttribArray(layout);
+  dkb_unbindVBO(VBO);
+}

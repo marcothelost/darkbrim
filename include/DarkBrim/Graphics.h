@@ -33,6 +33,14 @@ typedef struct dkb_EBO
 } dkb_EBO;
 
 /**
+ * @brief Structure representing a Vertex Array Object (VAO).
+ */
+typedef struct dkb_VAO
+{
+  GLuint ID;
+} dkb_VAO;
+
+/**
  * @brief Initializes a Vertex Buffer Object (VBO) with given vertices data.
  * 
  * @param VBO Pointer to the VBO structure to be initialized.
@@ -81,5 +89,39 @@ void dkb_unbindEBO();
  * @param EBO Pointer to the EBO structure to be deleted.
  */
 void dkb_deleteEBO(dkb_EBO* EBO);
+
+/**
+ * @brief Initializes a Vertex Array Object (VAO).
+ * 
+ * @param VAO Pointer to the VAO structure to be initialized.
+ */
+void dkb_initVAO(dkb_VAO* VAO);
+/**
+ * @brief Binds a Vertex Array Object (VAO) for use.
+ * 
+ * @param VAO Pointer to the VAO structure to be bound.
+ */
+void dkb_bindVAO(dkb_VAO* VAO);
+/**
+ * @brief Unbinds the currently bound Vertex Array Object (VAO).
+ */
+void dkb_unbindVAO();
+/**
+ * @brief Deletes a Vertex Array Object (VAO) and frees its resources.
+ * 
+ * @param VAO Pointer to the VAO structure to be deleted.
+ */
+void dkb_deleteVAO(dkb_VAO* VAO);
+/**
+ * @brief Links a Vertex Buffer Object (VBO) attribute to a Vertex Array Object (VAO).
+ * 
+ * @param VBO Pointer to the VBO structure containing the attribute data.
+ * @param layout The layout location of the attribute.
+ * @param size The number of components per attribute.
+ * @param type The data type of each component.
+ * @param stride The stride between consecutive attributes.
+ * @param offset The offset of the first component in the buffer.
+ */
+void dkb_linkAttribute(dkb_VBO* VBO, GLuint layout, GLuint size, GLenum type, GLsizeiptr stride, const void* offset);
 
 #endif // DKB_GRAPHICS_H
