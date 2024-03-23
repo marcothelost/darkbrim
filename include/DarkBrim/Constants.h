@@ -36,7 +36,7 @@ static const char* DKB_ENGINE_LICENSE = "GNU GPLv3";
  */
 static const dkb_RenderSettings DKB_DEFAULT_RENDER_SETTINGS =
 {
-  .pointSize = 2.f,
+  .pointSize = 5.f,
   .lineWidth = 2.f
 };
 

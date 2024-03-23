@@ -2,6 +2,7 @@
 add_library(
   DarkBrim
   Core.c
+  Graphics.c
 )
 
 # Include Directory
