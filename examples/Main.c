@@ -142,17 +142,15 @@ int main()
   // VAO, VBO, and EBO
   GLuint VAO;
   dkb_VBO VBO;
-  GLuint EBO;
+  dkb_EBO EBO;
 
   glGenVertexArrays(1, &VAO);
   dkb_initVBO(&VBO, vertices, sizeof(vertices));
-  glGenBuffers(1, &EBO);
+  dkb_initEBO(&EBO, indices, sizeof(indices));
 
   glBindVertexArray(VAO);
   dkb_bindVBO(&VBO);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+  dkb_bindEBO(&EBO);
 
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)0);
   glEnableVertexAttribArray(0);
@@ -161,7 +159,7 @@ int main()
 
   glBindVertexArray(0);
   dkb_unbindVBO();
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+  dkb_unbindEBO();
 
   // DarkBrim Initialization
   dkb_initialize();
@@ -187,6 +185,7 @@ int main()
 
   // Termination
   dkb_deleteVBO(&VBO);
+  dkb_deleteEBO(&EBO);
   glDeleteProgram(shaderProgram);
   glfwDestroyWindow(window);
   glfwTerminate();

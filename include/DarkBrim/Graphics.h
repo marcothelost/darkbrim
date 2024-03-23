@@ -22,9 +22,15 @@ void dkb_useFillMode();
 typedef struct dkb_VBO
 {
   GLuint ID;
-  GLfloat* vertices;
-  GLuint* indices;
 } dkb_VBO;
+
+/**
+ * @brief Structure representing an Element Buffer Object (EBO).
+ */
+typedef struct dkb_EBO
+{
+  GLuint ID;
+} dkb_EBO;
 
 /**
  * @brief Initializes a Vertex Buffer Object (VBO) with given vertices data.
@@ -50,5 +56,30 @@ void dkb_unbindVBO();
  * @param VBO Pointer to the VBO structure to be deleted.
  */
 void dkb_deleteVBO(dkb_VBO* VBO);
+
+/**
+ * @brief Initializes an Element Buffer Object (EBO) with given indices data.
+ * 
+ * @param EBO Pointer to the EBO structure to be initialized.
+ * @param indices Pointer to the indices data.
+ * @param indicesSize Size of the indices data in bytes.
+ */
+void dkb_initEBO(dkb_EBO* EBO, GLuint* indices, GLsizeiptr indicesSize);
+/**
+ * @brief Binds an Element Buffer Object (EBO) for use.
+ * 
+ * @param EBO Pointer to the EBO structure to be bound.
+ */
+void dkb_bindEBO(dkb_EBO* EBO);
+/**
+ * @brief Unbinds the currently bound Element Buffer Object (EBO).
+ */
+void dkb_unbindEBO();
+/**
+ * @brief Deletes an Element Buffer Object (EBO) and frees its resources.
+ * 
+ * @param EBO Pointer to the EBO structure to be deleted.
+ */
+void dkb_deleteEBO(dkb_EBO* EBO);
 
 #endif // DKB_GRAPHICS_H
