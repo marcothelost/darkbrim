@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "DarkBrim/Core.h"
+#include "DarkBrim/Graphics.h"
 
 // Window Settings
 const unsigned int WINDOW_WIDTH  = 800;
@@ -163,10 +164,16 @@ int main()
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+  // DarkBrim Initialization
+  dkb_initialize();
+
   // Version Info
   dkb_printEngineInfo();
   printf("\n");
   dkb_printVersionInfo();
+
+  // Display Mode
+  dkb_usePointMode();
 
   // Main Loop
   while (!glfwWindowShouldClose(window))

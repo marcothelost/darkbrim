@@ -1,8 +1,11 @@
 #include "DarkBrim/Core.h"
 
-/**
- * @brief Prints information about the DarkBrim engine.
- */
+void dkb_initialize()
+{
+  glPointSize(DKB_DEFAULT_RENDER_SETTINGS.pointSize);
+  glLineWidth(DKB_DEFAULT_RENDER_SETTINGS.lineWidth);
+}
+
 void dkb_printEngineInfo()
 {
   printf("%s %s\n", DKB_ENGINE_NAME, DKB_ENGINE_VERSION);
@@ -10,9 +13,6 @@ void dkb_printEngineInfo()
   printf("Licensed under %s\n", DKB_ENGINE_LICENSE);
 }
 
-/**
- * @brief Prints version information about OpenGL, GLEW, and GLFW.
- */
 void dkb_printVersionInfo()
 {
   printf("OpenGL: %s\n", glGetString(GL_VERSION));

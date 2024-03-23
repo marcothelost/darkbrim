@@ -7,7 +7,17 @@
 
 #include "Constants.h"
 
+/**
+ * @brief Initializes the DarkBrim engine.
+ */
+void dkb_initialize();
+/**
+ * @brief Prints information about the DarkBrim engine.
+ */
 void dkb_printVersionInfo();
+/**
+ * @brief Prints version information about OpenGL, GLEW, and GLFW.
+ */
 void dkb_printEngineInfo();
 
 #endif // DKB_CORE_H
