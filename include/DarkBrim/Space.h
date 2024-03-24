@@ -12,6 +12,14 @@ typedef struct dkb_Vec3
 } dkb_Vec3;
 
 /**
+ * @brief Structure representing a 4x4 matrix.
+ */
+typedef struct dkb_Mat4
+{
+  float elements[4][4];
+} dkb_Mat4;
+
+/**
  * @brief Creates a 3-dimensional vector with the specified components.
  * 
  * @param x The x-component of the vector.
@@ -78,5 +86,13 @@ float dkb_dot_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo);
  * @return A new dkb_Vec3 structure representing the cross product of the two vectors.
  */
 dkb_Vec3 dkb_cross_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo);
+
+/**
+ * @brief Creates a 4x4 matrix with the specified diagonal value.
+ * 
+ * @param diagonalValue The value to be set on the diagonal of the matrix.
+ * @return A new dkb_Mat4 structure representing the created matrix.
+ */
+dkb_Mat4 dkb_mat4(const float diagonalValue);
 
 #endif // DKB_SPACE_H

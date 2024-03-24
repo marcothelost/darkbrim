@@ -1,6 +1,18 @@
 #include "DarkBrim/Debug.h"
 
-void dkb_printVector(dkb_Vec3* vec)
+void dkb_printVec3(dkb_Vec3* vec)
 {
-  printf("X: %.3f; Y: %.3f; Z: %.3f\n", vec->x, vec->y, vec->z);
+  printf("X: %.2f; Y: %.2f; Z: %.2f\n", vec->x, vec->y, vec->z);
+}
+
+void dkb_printMat4(dkb_Mat4* mat)
+{
+  for (int y = 0; y < 4; y++)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      printf("%.2f ", mat->elements[y][x]);
+    }
+    printf("\n");
+  }
 }

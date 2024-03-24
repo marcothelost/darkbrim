@@ -10,6 +10,12 @@
  * 
  * @param vec Pointer to the dkb_Vec3 structure representing the vector to be printed.
  */
-void dkb_printVector(dkb_Vec3* vec);
+void dkb_printVec3(dkb_Vec3* vec);
+/**
+ * @brief Prints the elements of a 4x4 matrix.
+ * 
+ * @param mat Pointer to the dkb_Mat4 structure representing the matrix to be printed.
+ */
+void dkb_printMat4(dkb_Mat4* mat);
 
 #endif // DKB_DEBUG_H

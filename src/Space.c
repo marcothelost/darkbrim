@@ -79,3 +79,16 @@ dkb_Vec3 dkb_cross_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo)
   };
   return result;
 }
+
+dkb_Mat4 dkb_mat4(const float diagonalValue)
+{
+  dkb_Mat4 mat;
+  for (int y = 0; y < 4; y++)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      mat.elements[y][x] = x == y ? diagonalValue : 0.f;
+    }
+  }
+  return mat;
+}
