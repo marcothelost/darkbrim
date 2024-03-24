@@ -71,7 +71,7 @@ int main()
 
   // Shader Program
   dkb_Shader defaultShader;
-  dkb_initShader(&defaultShader, "vertex", "fragment");
+  dkb_initShader(&defaultShader, "assets/Shaders/default.vert", "assets/Shaders/default.frag");
 
   // VAO, VBO, and EBO
   dkb_VAO VAO;

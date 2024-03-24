@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 
 #include "Constants.h"
+#include "File.h"
 
 /**
  * @brief Sets the polygon rendering mode to point mode.
