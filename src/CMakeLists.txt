@@ -3,6 +3,7 @@ add_library(
   DarkBrim
   Core.c
   File.c
+  Keys.c
   Graphics.c
   Window.c
   Space.c

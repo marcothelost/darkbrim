@@ -185,6 +185,15 @@ float* dkb_valuePointer_mat4(dkb_Mat4* mat)
   return &mat->elements[0][0];
 }
 
+dkb_Mat4 dkb_translate_mat4(dkb_Mat4* mat, dkb_Vec3* vec)
+{
+  dkb_Mat4 result = *mat;
+  result.elements[3][0] = vec->x;
+  result.elements[3][1] = vec->y;
+  result.elements[3][2] = vec->z;
+  return result;
+}
+
 dkb_Mat4 dkb_projection_mat4(const float fov, const float aspect, const float zNear, const float zFar)
 {
   const float halfTanFOV = tanf(dkb_radians(fov)) / 2.f;

@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "DarkBrim/Core.h"
+#include "DarkBrim/Keys.h"
 #include "DarkBrim/Graphics.h"
 #include "DarkBrim/Window.h"
 #include "DarkBrim/Space.h"
@@ -21,15 +22,12 @@ const float CAMERA_ASPECT = (float)WINDOW_WIDTH / WINDOW_HEIGHT;
 const float CAMERA_NEAR   = 0.1f;
 const float CAMERA_FAR    = 100.f;
 
-// Settings
-const unsigned int INFO_LOG_SIZE = 512;
-
 // Vertices and Indices
 GLfloat vertices[] = {
-  -0.5f, -0.5f, -3.f, 1.f, 1.f, 1.f,
-   0.5f, -0.5f, -3.f, 1.f, 1.f, 1.f,
-  -0.5f,  0.5f, -3.f, 1.f, 1.f, 1.f,
-   0.5f,  0.5f, -3.f, 1.f, 1.f, 1.f,
+  -0.5f, -0.5f, 0.f, 1.f, 1.f, 1.f,
+   0.5f, -0.5f, 0.f, 1.f, 1.f, 1.f,
+  -0.5f,  0.5f, 0.f, 1.f, 1.f, 1.f,
+   0.5f,  0.5f, 0.f, 1.f, 1.f, 1.f,
 };
 GLuint indices[] = {
   0, 1, 3,
@@ -103,6 +101,9 @@ int main()
   // Display Mode
   dkb_useLineMode();
 
+  // Camera Position
+  dkb_Vec3 cameraPosition = dkb_vec3(0.f, 0.f, -3.f);
+
   // Main Loop
   while (!glfwWindowShouldClose(window.glfwInstance))
   {
@@ -110,9 +111,26 @@ int main()
     glClear(GL_COLOR_BUFFER_BIT);
     dkb_useShader(&defaultShader);
 
+    if (dkb_isKeyPressed(window.glfwInstance, W))
+    {
+      cameraPosition.z += 0.1f;
+    }
+    if (dkb_isKeyPressed(window.glfwInstance, S))
+    {
+      cameraPosition.z -= 0.1f;
+    }
+
     dkb_Mat4 model = dkb_mat4(1.f);
     dkb_Mat4 view = dkb_mat4(1.f);
-    dkb_Mat4 proj = dkb_projection_mat4(CAMERA_FOV, window.aspect, CAMERA_NEAR, CAMERA_FAR);
+    dkb_Mat4 proj = dkb_mat4(1.f);
+    
+    view = dkb_translate_mat4(&view, &cameraPosition);
+    proj = dkb_projection_mat4(
+      CAMERA_FOV,
+      window.aspect,
+      CAMERA_NEAR,
+      CAMERA_FAR
+    );
 
     dkb_shader_setMat4(&defaultShader, "model", &model);
     dkb_shader_setMat4(&defaultShader, "view", &view);

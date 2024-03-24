@@ -166,6 +166,14 @@ dkb_Mat4 dkb_mult_mat4_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo);
  */
 float* dkb_valuePointer_mat4(dkb_Mat4* mat);
 /**
+ * @brief Applies a translation to a 4x4 matrix.
+ * 
+ * @param mat Pointer to the dkb_Mat4 structure representing the input matrix.
+ * @param vec Pointer to the dkb_Vec3 structure representing the translation vector.
+ * @return A new dkb_Mat4 structure representing the resulting matrix after translation.
+ */
+dkb_Mat4 dkb_translate_mat4(dkb_Mat4* mat, dkb_Vec3* vec);
+/**
  * @brief Generates a perspective projection matrix.
  * 
  * @param fov The field of view angle (in degrees).
