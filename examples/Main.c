@@ -6,6 +6,7 @@
 
 #include "DarkBrim/Core.h"
 #include "DarkBrim/Graphics.h"
+#include "DarkBrim/Window.h"
 
 // Window Settings
 const unsigned int WINDOW_WIDTH  = 800;
@@ -37,27 +38,21 @@ int main()
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 
   // GLFw Window
-  GLFWwindow* window = glfwCreateWindow(
-    WINDOW_WIDTH,
-    WINDOW_HEIGHT,
-    WINDOW_TITLE,
-    NULL,
-    NULL
-  );
-  if (window == NULL)
+  dkb_Window window;
+  dkb_initWindow(&window, WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HEIGHT);
+  if (window.glfwInstance == NULL)
   {
-    fprintf(stderr, "Failed to create a GLFW window!\n");
     glfwTerminate();
     return EXIT_FAILURE;
   }
-  glfwMakeContextCurrent(window);
+  dkb_useWindow(&window);
 
   // Initializing GLEW
   GLenum glewErr = glewInit();
   if (glewErr != GLEW_OK)
   {
     fprintf(stderr, "Failed to initialize GLEW!\n");
-    glfwDestroyWindow(window);
+    glfwDestroyWindow(window.glfwInstance);
     glfwTerminate();
     return EXIT_FAILURE;
   }
@@ -105,14 +100,14 @@ int main()
   dkb_useLineMode();
 
   // Main Loop
-  while (!glfwWindowShouldClose(window))
+  while (!glfwWindowShouldClose(window.glfwInstance))
   {
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT);
     dkb_useShader(&defaultShader);
     dkb_bindVAO(&VAO);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(window.glfwInstance);
   }
 
   // Termination
@@ -120,7 +115,7 @@ int main()
   dkb_deleteVBO(&VBO);
   dkb_deleteEBO(&EBO);
   dkb_deleteShader(&defaultShader);
-  glfwDestroyWindow(window);
+  glfwDestroyWindow(window.glfwInstance);
   glfwTerminate();
   return EXIT_SUCCESS;
 }

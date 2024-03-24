@@ -4,6 +4,7 @@ add_library(
   Core.c
   File.c
   Graphics.c
+  Window.c
 )
 
 # Include Directory
