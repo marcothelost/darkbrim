@@ -15,15 +15,21 @@ const unsigned int WINDOW_WIDTH  = 800;
 const unsigned int WINDOW_HEIGHT = 600;
 const char*        WINDOW_TITLE  = "DarkBrim";
 
+// Camera Settings
+const float CAMERA_FOV    = 60.f;
+const float CAMERA_ASPECT = (float)WINDOW_WIDTH / WINDOW_HEIGHT;
+const float CAMERA_NEAR   = 0.1f;
+const float CAMERA_FAR    = 100.f;
+
 // Settings
 const unsigned int INFO_LOG_SIZE = 512;
 
 // Vertices and Indices
 GLfloat vertices[] = {
-  -0.5f, -0.5f, 0.f, 1.f, 1.f, 1.f,
-   0.5f, -0.5f, 0.f, 1.f, 1.f, 1.f,
-  -0.5f,  0.5f, 0.f, 1.f, 1.f, 1.f,
-   0.5f,  0.5f, 0.f, 1.f, 1.f, 1.f,
+  -0.5f, -0.5f, -3.f, 1.f, 1.f, 1.f,
+   0.5f, -0.5f, -3.f, 1.f, 1.f, 1.f,
+  -0.5f,  0.5f, -3.f, 1.f, 1.f, 1.f,
+   0.5f,  0.5f, -3.f, 1.f, 1.f, 1.f,
 };
 GLuint indices[] = {
   0, 1, 3,
@@ -97,18 +103,21 @@ int main()
   // Display Mode
   dkb_useLineMode();
 
-  // Testing Mat4
-  dkb_Mat4 matOne = dkb_mat4(1.f);
-  dkb_Mat4 matTwo = dkb_mat4(1.f);
-  dkb_Mat4 matThree = dkb_mult_mat4_mat4(&matOne, &matTwo);
-  dkb_printMat4(&matThree);
-
   // Main Loop
   while (!glfwWindowShouldClose(window.glfwInstance))
   {
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT);
     dkb_useShader(&defaultShader);
+
+    dkb_Mat4 model = dkb_mat4(1.f);
+    dkb_Mat4 view = dkb_mat4(1.f);
+    dkb_Mat4 proj = dkb_projection_mat4(CAMERA_FOV, window.aspect, CAMERA_NEAR, CAMERA_FAR);
+
+    dkb_shader_setMat4(&defaultShader, "model", &model);
+    dkb_shader_setMat4(&defaultShader, "view", &view);
+    dkb_shader_setMat4(&defaultShader, "proj", &proj);
+
     dkb_bindVAO(&VAO);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);
     glfwSwapBuffers(window.glfwInstance);

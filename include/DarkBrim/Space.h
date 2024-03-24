@@ -1,6 +1,20 @@
 #ifndef DKB_SPACE_H
 #define DKB_SPACE_H
 
+#include <math.h>
+
+/**
+ * @brief A constant representing the value of pi (π).
+ */
+static const float DKB_PI = 3.141593f;
+/**
+ * @brief Converts degrees to radians.
+ * 
+ * @param degrees The angle in degrees to be converted.
+ * @return The equivalent angle in radians.
+ */
+float dkb_radians(const float degrees);
+
 /**
  * @brief Structure representing a 3-dimensional vector.
  */
@@ -143,5 +157,23 @@ dkb_Mat4 dkb_mult_mat4_double(dkb_Mat4* mat, const double scalar);
  * @return A new dkb_Mat4 structure representing the result of the multiplication.
  */
 dkb_Mat4 dkb_mult_mat4_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo);
+
+/**
+ * @brief Retrieves a pointer to the elements of a 4x4 matrix.
+ * 
+ * @param mat Pointer to the dkb_Mat4 structure representing the matrix.
+ * @return A pointer to the elements of the matrix.
+ */
+float* dkb_valuePointer_mat4(dkb_Mat4* mat);
+/**
+ * @brief Generates a perspective projection matrix.
+ * 
+ * @param fov The field of view angle (in degrees).
+ * @param aspect The aspect ratio (width/height) of the viewport.
+ * @param zNear The distance to the near clipping plane.
+ * @param zFar The distance to the far clipping plane.
+ * @return A dkb_Mat4 structure representing the generated perspective projection matrix.
+ */
+dkb_Mat4 dkb_projection_mat4(const float fov, const float aspect, const float zNear, const float zFar);
 
 #endif // DKB_SPACE_H

@@ -1,5 +1,10 @@
 #include "DarkBrim/Space.h"
 
+float dkb_radians(const float degrees)
+{
+  return degrees * DKB_PI / 180.f;
+}
+
 dkb_Vec3 dkb_vec3(const float x, const float y, const float z)
 {
   dkb_Vec3 vec;
@@ -172,5 +177,24 @@ dkb_Mat4 dkb_mult_mat4_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo)
       }
     }
   }
+  return result;
+}
+
+float* dkb_valuePointer_mat4(dkb_Mat4* mat)
+{
+  return &mat->elements[0][0];
+}
+
+dkb_Mat4 dkb_projection_mat4(const float fov, const float aspect, const float zNear, const float zFar)
+{
+  const float halfTanFOV = tanf(dkb_radians(fov)) / 2.f;
+  dkb_Mat4 result = dkb_mat4(0.f);
+
+  result.elements[0][0] = 1.f / (aspect * halfTanFOV);
+  result.elements[1][1] = 1.f / halfTanFOV;
+  result.elements[2][2] = (zFar + zNear) / (zNear - zFar);
+  result.elements[2][3] = -1.f;
+  result.elements[3][2] = -(2.f * zFar * zNear) / (zFar - zNear);
+
   return result;
 }

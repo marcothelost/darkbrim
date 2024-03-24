@@ -14,6 +14,7 @@ typedef struct dkb_Window
   char* title;
   unsigned int window;
   unsigned int height;
+  float aspect;
 } dkb_Window;
 
 /**

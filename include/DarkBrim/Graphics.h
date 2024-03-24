@@ -5,6 +5,7 @@
 
 #include "Constants.h"
 #include "File.h"
+#include "Space.h"
 
 /**
  * @brief Sets the polygon rendering mode to point mode.
@@ -73,6 +74,14 @@ void dkb_useShader(dkb_Shader* shader);
  * @param shader Pointer to the dkb_Shader structure representing the shader program to be deleted.
  */
 void dkb_deleteShader(dkb_Shader* shader);
+/**
+ * @brief Sets a 4x4 matrix uniform in a shader program.
+ * 
+ * @param shader Pointer to the dkb_Shader structure representing the shader program.
+ * @param uniform Name of the uniform variable in the shader program.
+ * @param mat Pointer to the dkb_Mat4 structure representing the matrix.
+ */
+void dkb_shader_setMat4(dkb_Shader* shader, const char* uniform, dkb_Mat4* mat);
 
 /**
  * @brief Initializes a Vertex Buffer Object (VBO) with given vertices data.

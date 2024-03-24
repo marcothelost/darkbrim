@@ -67,6 +67,11 @@ void dkb_useShader(dkb_Shader* shader)
 { glUseProgram(shader->ID); }
 void dkb_deleteShader(dkb_Shader* shader)
 { glDeleteProgram(shader->ID); }
+void dkb_shader_setMat4(dkb_Shader* shader, const char* uniform, dkb_Mat4* mat)
+{
+  GLuint matLoc = glGetUniformLocation(shader->ID, uniform);
+  glUniformMatrix4fv(matLoc, 1, GL_FALSE, dkb_valuePointer_mat4(mat));
+}
 
 void dkb_initVBO(dkb_VBO* VBO, GLfloat* vertices, GLsizeiptr verticesSize)
 {
