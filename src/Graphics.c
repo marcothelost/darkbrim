@@ -7,6 +7,82 @@ void dkb_useLineMode()
 void dkb_useFillMode()
 { glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); }
 
+const char* vertexShaderSource =
+  "#version 330 core\n"
+  "layout (location = 0) in vec3 aPos;\n"
+  "layout (location = 1) in vec3 aCol;\n"
+  "out vec3 vertCol;\n"
+  "void main()\n"
+  "{\n"
+  "  vertCol = aCol;\n"
+  "  gl_Position = vec4(aPos, 1.f);\n"
+  "}\0";
+const char* fragmentShaderSource =
+  "#version 330 core\n"
+  "in vec3 vertCol;\n"
+  "out vec4 FragColor;\n"
+  "void main()\n"
+  "{\n"
+  "  FragColor = vec4(vertCol, 1.f);\n"
+  "}\0";
+
+void dkb_initShader(dkb_Shader* shader, const char* vertexPath, const char* fragmentPath)
+{
+  // Shaders
+  GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+  glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+  glCompileShader(vertexShader);
+
+  GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+  glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+  glCompileShader(fragmentShader);
+
+  // Info Log
+  int success = 0;
+  char infoLog[DKB_INFO_LOG_SIZE];
+
+  // Validating the Vertex Shader
+  glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+  if (!success)
+  {
+    glGetShaderInfoLog(vertexShader, DKB_INFO_LOG_SIZE, NULL, infoLog);
+    fprintf(stderr, "Failed to compile the vertex shader!\n");
+    fprintf(stderr, "Error: \n%s\n", infoLog);
+  }
+
+  // Validating the Fragment Shader
+  glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+  if (!success)
+  {
+    glGetShaderInfoLog(fragmentShader, DKB_INFO_LOG_SIZE, NULL, infoLog);
+    fprintf(stderr, "Failed to compile the fragment shader!\n");
+    fprintf(stderr, "Error: \n%s\n", infoLog);
+  }
+
+  // Shader Program
+  shader->ID = glCreateProgram();
+  glAttachShader(shader->ID, vertexShader);
+  glAttachShader(shader->ID, fragmentShader);
+  glLinkProgram(shader->ID);
+
+  // Validating the Shader Program
+  glGetProgramiv(fragmentShader, GL_LINK_STATUS, &success);
+  if (!success)
+  {
+    glGetShaderInfoLog(fragmentShader, DKB_INFO_LOG_SIZE, NULL, infoLog);
+    fprintf(stderr, "Failed to link the shader program!\n");
+    fprintf(stderr, "Error: \n%s\n", infoLog);
+  }
+
+  // Deleting the Shaders
+  glDeleteShader(vertexShader);
+  glDeleteShader(fragmentShader);
+}
+void dkb_useShader(dkb_Shader* shader)
+{ glUseProgram(shader->ID); }
+void dkb_deleteShader(dkb_Shader* shader)
+{ glDeleteProgram(shader->ID); }
+
 void dkb_initVBO(dkb_VBO* VBO, GLfloat* vertices, GLsizeiptr verticesSize)
 {
   glGenBuffers(1, &VBO->ID);

@@ -40,4 +40,9 @@ static const dkb_RenderSettings DKB_DEFAULT_RENDER_SETTINGS =
   .lineWidth = 2.f
 };
 
+/**
+ * @brief Size of the information log buffer for DarkBrim engine.
+ */
+static const unsigned int DKB_INFO_LOG_SIZE = 512;
+
 #endif // DKB_CONSTANTS_H

@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 
+#include "Constants.h"
+
 /**
  * @brief Sets the polygon rendering mode to point mode.
  */
@@ -15,6 +17,14 @@ void dkb_useLineMode();
  * @brief Sets the polygon rendering mode to fill mode.
  */
 void dkb_useFillMode();
+
+/**
+ * @brief Structure representing a shader in the DarkBrim engine.
+ */
+typedef struct dkb_Shader
+{
+  GLuint ID;
+} dkb_Shader;
 
 /**
  * @brief Structure representing a Vertex Buffer Object (VBO).
@@ -39,6 +49,29 @@ typedef struct dkb_VAO
 {
   GLuint ID;
 } dkb_VAO;
+
+/**
+ * @brief Initializes a shader with vertex and fragment shader files.
+ * 
+ * This function compiles and links vertex and fragment shaders and creates a shader program.
+ * 
+ * @param shader Pointer to the dkb_Shader structure to be initialized.
+ * @param vertexPath Path to the vertex shader file.
+ * @param fragmentPath Path to the fragment shader file.
+ */
+void dkb_initShader(dkb_Shader* shader, const char* vertexPath, const char* fragmentPath);
+/**
+ * @brief Sets a shader as the currently active shader program.
+ * 
+ * @param shader Pointer to the dkb_Shader structure representing the shader program to be used.
+ */
+void dkb_useShader(dkb_Shader* shader);
+/**
+ * @brief Deletes a shader program and releases associated resources.
+ * 
+ * @param shader Pointer to the dkb_Shader structure representing the shader program to be deleted.
+ */
+void dkb_deleteShader(dkb_Shader* shader);
 
 /**
  * @brief Initializes a Vertex Buffer Object (VBO) with given vertices data.
