@@ -21,4 +21,62 @@ typedef struct dkb_Vec3
  */
 dkb_Vec3 dkb_vec3(const float x, const float y, const float z);
 
+/**
+ * @brief Adds two 3-dimensional vectors component-wise.
+ * 
+ * @param vecOne Pointer to the first vector.
+ * @param vecTwo Pointer to the second vector.
+ * @return A new dkb_Vec3 structure representing the result of the addition.
+ */
+dkb_Vec3 dkb_add_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo);
+/**
+ * @brief Subtracts two 3-dimensional vectors component-wise.
+ * 
+ * @param vecOne Pointer to the first vector.
+ * @param vecTwo Pointer to the second vector.
+ * @return A new dkb_Vec3 structure representing the result of the subtraction.
+ */
+dkb_Vec3 dkb_sub_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo);
+/**
+ * @brief Multiplies a 3-dimensional vector by an integer scalar.
+ * 
+ * @param vec Pointer to the vector.
+ * @param scalar The integer scalar.
+ * @return A new dkb_Vec3 structure representing the result of the multiplication.
+ */
+dkb_Vec3 dkb_mult_vec3_int(dkb_Vec3* vec, const int scalar);
+/**
+ * @brief Multiplies a 3-dimensional vector by a float scalar.
+ * 
+ * @param vec Pointer to the vector.
+ * @param scalar The float scalar.
+ * @return A new dkb_Vec3 structure representing the result of the multiplication.
+ */
+dkb_Vec3 dkb_mult_vec3_float(dkb_Vec3* vec, const float scalar);
+/**
+ * @brief Multiplies a 3-dimensional vector by a double scalar.
+ * 
+ * @param vec Pointer to the vector.
+ * @param scalar The double scalar.
+ * @return A new dkb_Vec3 structure representing the result of the multiplication.
+ */
+dkb_Vec3 dkb_mult_vec3_double(dkb_Vec3* vec, const double scalar);
+
+/**
+ * @brief Calculates the dot product of two 3-dimensional vectors.
+ * 
+ * @param vecOne Pointer to the first vector.
+ * @param vecTwo Pointer to the second vector.
+ * @return The dot product of the two vectors.
+ */
+float dkb_dot_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo);
+/**
+ * @brief Calculates the cross product of two 3-dimensional vectors.
+ * 
+ * @param vecOne Pointer to the first vector.
+ * @param vecTwo Pointer to the second vector.
+ * @return A new dkb_Vec3 structure representing the cross product of the two vectors.
+ */
+dkb_Vec3 dkb_cross_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo);
+
 #endif // DKB_SPACE_H

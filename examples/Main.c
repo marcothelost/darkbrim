@@ -102,8 +102,10 @@ int main()
   dkb_useLineMode();
 
   // Testing Vec3
-  dkb_Vec3 vec = dkb_vec3(2.f, 3.f, 4.f);
-  dkb_printVector(&vec);
+  dkb_Vec3 vecA = dkb_vec3(2.f, 3.f, 4.f);
+  dkb_Vec3 vecB = dkb_vec3(3.f, 5.f, -2.f);
+  dkb_Vec3 vecC = dkb_cross_vec3(&vecA, &vecB);
+  dkb_printVector(&vecC);
 
   // Main Loop
   while (!glfwWindowShouldClose(window.glfwInstance))
