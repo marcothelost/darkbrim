@@ -7,6 +7,8 @@
 #include "DarkBrim/Core.h"
 #include "DarkBrim/Graphics.h"
 #include "DarkBrim/Window.h"
+#include "DarkBrim/Space.h"
+#include "DarkBrim/Debug.h"
 
 // Window Settings
 const unsigned int WINDOW_WIDTH  = 800;
@@ -98,6 +100,10 @@ int main()
 
   // Display Mode
   dkb_useLineMode();
+
+  // Testing Vec3
+  dkb_Vec3 vec = dkb_vec3(2.f, 3.f, 4.f);
+  dkb_printVector(&vec);
 
   // Main Loop
   while (!glfwWindowShouldClose(window.glfwInstance))

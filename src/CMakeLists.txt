@@ -5,6 +5,8 @@ add_library(
   File.c
   Graphics.c
   Window.c
+  Space.c
+  Debug.c
 )
 
 # Include Directory
