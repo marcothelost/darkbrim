@@ -8,6 +8,10 @@
 #include "Constants.h"
 
 /**
+ * @brief Initializes GLFW library for DarkBrim engine usage.
+ */
+void dkb_initializeGlfw();
+/**
  * @brief Initializes the DarkBrim engine.
  */
 void dkb_initialize();

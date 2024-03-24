@@ -1,5 +1,14 @@
 #include "DarkBrim/Core.h"
 
+void dkb_initializeGlfw()
+{
+  glfwInit();
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+}
+
 void dkb_initialize()
 {
   glPointSize(DKB_DEFAULT_RENDER_SETTINGS.pointSize);

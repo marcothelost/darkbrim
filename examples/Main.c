@@ -33,11 +33,7 @@ GLuint indices[] = {
 int main()
 {
   // Initializing GLFW
-  glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
+  dkb_initializeGlfw();
 
   // GLFw Window
   dkb_Window window;
@@ -102,8 +98,10 @@ int main()
   dkb_useLineMode();
 
   // Testing Mat4
-  dkb_Mat4 mat = dkb_mat4(1.f);
-  dkb_printMat4(&mat);
+  dkb_Mat4 matOne = dkb_mat4(1.f);
+  dkb_Mat4 matTwo = dkb_mat4(1.f);
+  dkb_Mat4 matThree = dkb_mult_mat4_mat4(&matOne, &matTwo);
+  dkb_printMat4(&matThree);
 
   // Main Loop
   while (!glfwWindowShouldClose(window.glfwInstance))

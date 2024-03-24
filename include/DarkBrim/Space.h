@@ -95,4 +95,53 @@ dkb_Vec3 dkb_cross_vec3(dkb_Vec3* vecOne, dkb_Vec3* vecTwo);
  */
 dkb_Mat4 dkb_mat4(const float diagonalValue);
 
+/**
+ * @brief Adds two 4x4 matrices element-wise.
+ * 
+ * @param matOne Pointer to the first matrix.
+ * @param matTwo Pointer to the second matrix.
+ * @return A new dkb_Mat4 structure representing the result of the addition.
+ */
+dkb_Mat4 dkb_add_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo);
+/**
+ * @brief Subtracts two 4x4 matrices element-wise.
+ * 
+ * @param matOne Pointer to the first matrix.
+ * @param matTwo Pointer to the second matrix.
+ * @return A new dkb_Mat4 structure representing the result of the subtraction.
+ */
+dkb_Mat4 dkb_sub_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo);
+/**
+ * @brief Multiplies a 4x4 matrix by an integer scalar.
+ * 
+ * @param mat Pointer to the matrix.
+ * @param scalar The integer scalar.
+ * @return A new dkb_Mat4 structure representing the result of the multiplication.
+ */
+dkb_Mat4 dkb_mult_mat4_int(dkb_Mat4* mat, const int scalar);
+/**
+ * @brief Multiplies a 4x4 matrix by a float scalar.
+ * 
+ * @param mat Pointer to the matrix.
+ * @param scalar The float scalar.
+ * @return A new dkb_Mat4 structure representing the result of the multiplication.
+ */
+dkb_Mat4 dkb_mult_mat4_float(dkb_Mat4* mat, const float scalar);
+/**
+ * @brief Multiplies a 4x4 matrix by a double scalar.
+ * 
+ * @param mat Pointer to the matrix.
+ * @param scalar The double scalar.
+ * @return A new dkb_Mat4 structure representing the result of the multiplication.
+ */
+dkb_Mat4 dkb_mult_mat4_double(dkb_Mat4* mat, const double scalar);
+/**
+ * @brief Multiplies two 4x4 matrices.
+ * 
+ * @param matOne Pointer to the first matrix.
+ * @param matTwo Pointer to the second matrix.
+ * @return A new dkb_Mat4 structure representing the result of the multiplication.
+ */
+dkb_Mat4 dkb_mult_mat4_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo);
+
 #endif // DKB_SPACE_H

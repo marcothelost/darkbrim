@@ -92,3 +92,85 @@ dkb_Mat4 dkb_mat4(const float diagonalValue)
   }
   return mat;
 }
+
+dkb_Mat4 dkb_add_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo)
+{
+  dkb_Mat4 result;
+  for (int y = 0; y < 4; y++)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      result.elements[y][x] = matOne->elements[y][x] + matTwo->elements[y][x];
+    }
+  }
+  return result;
+}
+
+dkb_Mat4 dkb_sub_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo)
+{
+  dkb_Mat4 result;
+  for (int y = 0; y < 4; y++)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      result.elements[y][x] = matOne->elements[y][x] - matTwo->elements[y][x];
+    }
+  }
+  return result;
+}
+
+dkb_Mat4 dkb_mult_mat4_int(dkb_Mat4* mat, const int scalar)
+{
+  dkb_Mat4 result = *mat;
+  for (int y = 0; y < 4; y++)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      result.elements[y][x] * scalar;
+    }
+  }
+  return result;
+}
+
+dkb_Mat4 dkb_mult_mat4_float(dkb_Mat4* mat, const float scalar)
+{
+  dkb_Mat4 result = *mat;
+  for (int y = 0; y < 4; y++)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      result.elements[y][x] * scalar;
+    }
+  }
+  return result;
+}
+
+dkb_Mat4 dkb_mult_mat4_double(dkb_Mat4* mat, const double scalar)
+{
+  dkb_Mat4 result = *mat;
+  for (int y = 0; y < 4; y++)
+  {
+    for (int x = 0; x < 4; x++)
+    {
+      result.elements[y][x] * scalar;
+    }
+  }
+  return result;
+}
+
+dkb_Mat4 dkb_mult_mat4_mat4(dkb_Mat4* matOne, dkb_Mat4* matTwo)
+{
+  dkb_Mat4 result;
+  for (int i = 0; i < 4; i++)
+  {
+    for (int j = 0; j < 4; j++)
+    {
+      result.elements[i][j] = 0.f;
+      for (int k = 0; k < 4; k++)
+      {
+        result.elements[i][j] += matOne->elements[i][k] * matTwo->elements[k][j];
+      }
+    }
+  }
+  return result;
+}
