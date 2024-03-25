@@ -15,6 +15,8 @@ typedef struct dkb_Window
   unsigned int window;
   unsigned int height;
   float aspect;
+  float lastTime;
+  float deltaTime;
 } dkb_Window;
 
 /**
@@ -26,6 +28,12 @@ typedef struct dkb_Window
  * @param height Height of the window.
  */
 void dkb_initWindow(dkb_Window* window, const char* title, const unsigned int width, const unsigned int height);
+/**
+ * @brief Updates the window.
+ * 
+ * @param window Pointer to the dkb_Window structure representing the window to be updated.
+ */
+void dkb_updateWindow(dkb_Window* window);
 /**
  * @brief Makes a window the current OpenGL context.
  * 

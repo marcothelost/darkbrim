@@ -25,7 +25,16 @@ void dkb_initWindow(dkb_Window* window, const char* title, const unsigned int wi
   glfwSetWindowUserPointer(window->glfwInstance, window);
 
   window->aspect = (float)width / height;
+  window->lastTime = (float)glfwGetTime();
 }
+
+void dkb_updateWindow(dkb_Window* window)
+{
+  float currentTime = (float)glfwGetTime();
+  window->deltaTime = currentTime - window->lastTime;
+  window->lastTime  = currentTime;
+}
+
 void dkb_useWindow(dkb_Window* window)
 {
   glfwMakeContextCurrent(window->glfwInstance);

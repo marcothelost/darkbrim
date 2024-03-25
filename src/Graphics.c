@@ -63,6 +63,7 @@ void dkb_initShader(dkb_Shader* shader, const char* vertexPath, const char* frag
   glDeleteShader(vertexShader);
   glDeleteShader(fragmentShader);
 }
+
 void dkb_useShader(dkb_Shader* shader)
 { glUseProgram(shader->ID); }
 void dkb_deleteShader(dkb_Shader* shader)
@@ -80,6 +81,7 @@ void dkb_initVBO(dkb_VBO* VBO, GLfloat* vertices, GLsizeiptr verticesSize)
   glBufferData(GL_ARRAY_BUFFER, verticesSize, vertices, GL_STATIC_DRAW);
   dkb_unbindVBO(VBO);
 }
+
 void dkb_bindVBO(dkb_VBO* VBO)
 { glBindBuffer(GL_ARRAY_BUFFER, VBO->ID); }
 void dkb_unbindVBO()
@@ -94,6 +96,7 @@ void dkb_initEBO(dkb_EBO* EBO, GLuint* indices, GLsizeiptr indicesSize)
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, indices, GL_STATIC_DRAW);
   dkb_unbindEBO(EBO);
 }
+
 void dkb_bindEBO(dkb_EBO* EBO)
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO->ID); }
 void dkb_unbindEBO()
@@ -109,6 +112,7 @@ void dkb_unbindVAO()
 { glBindVertexArray(0); }
 void dkb_deleteVAO(dkb_VAO* VAO)
 { glDeleteVertexArrays(1, &VAO->ID); }
+
 void dkb_linkAttribute(dkb_VBO* VBO, GLuint layout, GLuint size, GLenum type, GLsizeiptr stride, const void* offset)
 {
   dkb_bindVBO(VBO);

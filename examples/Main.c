@@ -108,17 +108,19 @@ int main()
   while (!glfwWindowShouldClose(window.glfwInstance))
   {
     glfwPollEvents();
-    glClear(GL_COLOR_BUFFER_BIT);
-    dkb_useShader(&defaultShader);
+    dkb_updateWindow(&window);
 
     if (dkb_isKeyPressed(window.glfwInstance, W))
     {
-      cameraPosition.z += 0.1f;
+      cameraPosition.z += 10.f * window.deltaTime;
     }
     if (dkb_isKeyPressed(window.glfwInstance, S))
     {
-      cameraPosition.z -= 0.1f;
+      cameraPosition.z -= 10.f * window.deltaTime;
     }
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    dkb_useShader(&defaultShader);
 
     dkb_Mat4 model = dkb_mat4(1.f);
     dkb_Mat4 view = dkb_mat4(1.f);
