@@ -7,6 +7,7 @@ add_library(
   Graphics.c
   Window.c
   Space.c
+  Camera.c
   Debug.c
 )
 

@@ -9,6 +9,7 @@
 #include "DarkBrim/Graphics.h"
 #include "DarkBrim/Window.h"
 #include "DarkBrim/Space.h"
+#include "DarkBrim/Camera.h"
 #include "DarkBrim/Debug.h"
 
 // Window Settings
@@ -21,6 +22,7 @@ const float CAMERA_FOV    = 60.f;
 const float CAMERA_ASPECT = (float)WINDOW_WIDTH / WINDOW_HEIGHT;
 const float CAMERA_NEAR   = 0.1f;
 const float CAMERA_FAR    = 100.f;
+const float CAMERA_SPEED  = 10.f;
 
 // Vertices and Indices
 GLfloat vertices[] = {
@@ -101,8 +103,9 @@ int main()
   // Display Mode
   dkb_useLineMode();
 
-  // Camera Position
-  dkb_Vec3 cameraPosition = dkb_vec3(0.f, 0.f, -3.f);
+  // Camera
+  dkb_Camera camera;
+  dkb_initCamera(&camera, CAMERA_FOV, CAMERA_ASPECT, CAMERA_NEAR, CAMERA_FAR, 10.f);
 
   // Main Loop
   while (!glfwWindowShouldClose(window.glfwInstance))
@@ -112,11 +115,27 @@ int main()
 
     if (dkb_isKeyPressed(window.glfwInstance, W))
     {
-      cameraPosition.z += 10.f * window.deltaTime;
+      camera.position.z += 10.f * window.deltaTime;
     }
     if (dkb_isKeyPressed(window.glfwInstance, S))
     {
-      cameraPosition.z -= 10.f * window.deltaTime;
+      camera.position.z -= 10.f * window.deltaTime;
+    }
+    if (dkb_isKeyPressed(window.glfwInstance, A))
+    {
+      camera.position.x += 10.f * window.deltaTime;
+    }
+    if (dkb_isKeyPressed(window.glfwInstance, D))
+    {
+      camera.position.x -= 10.f * window.deltaTime;
+    }
+    if (dkb_isKeyPressed(window.glfwInstance, Spacebar))
+    {
+      camera.position.y -= 10.f * window.deltaTime;
+    }
+    if (dkb_isKeyPressed(window.glfwInstance, LeftShift))
+    {
+      camera.position.y += 10.f * window.deltaTime;
     }
 
     glClear(GL_COLOR_BUFFER_BIT);
@@ -126,7 +145,7 @@ int main()
     dkb_Mat4 view = dkb_mat4(1.f);
     dkb_Mat4 proj = dkb_mat4(1.f);
     
-    view = dkb_translate_mat4(&view, &cameraPosition);
+    view = dkb_translate_mat4(&view, &camera.position);
     proj = dkb_projection_mat4(
       CAMERA_FOV,
       window.aspect,
