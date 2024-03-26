@@ -26,6 +26,7 @@ void dkb_initWindow(dkb_Window* window, const char* title, const unsigned int wi
 
   window->aspect = (float)width / height;
   window->lastTime = (float)glfwGetTime();
+  window->mouseLocked = false;
 }
 
 void dkb_updateWindow(dkb_Window* window)
@@ -38,4 +39,16 @@ void dkb_updateWindow(dkb_Window* window)
 void dkb_useWindow(dkb_Window* window)
 {
   glfwMakeContextCurrent(window->glfwInstance);
+}
+
+void dkb_lockMouse(dkb_Window* window)
+{
+  window->mouseLocked = true;
+  glfwSetInputMode(window->glfwInstance, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void dkb_unlockMouse(dkb_Window* window)
+{
+  window->mouseLocked = false;
+  glfwSetInputMode(window->glfwInstance, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }

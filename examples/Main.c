@@ -113,27 +113,36 @@ int main()
     glfwPollEvents();
     dkb_updateWindow(&window);
 
-    if (dkb_isKeyPressed(window.glfwInstance, W))
+    if (dkb_isKeyPressed(window.glfwInstance, E))
+    {
+      dkb_lockMouse(&window);
+    }
+    else if (dkb_isKeyPressed(window.glfwInstance, Escape))
+    {
+      dkb_unlockMouse(&window);
+    }
+
+    if (dkb_isKeyPressed(window.glfwInstance, W) && window.mouseLocked)
     {
       camera.position.z += 10.f * window.deltaTime;
     }
-    if (dkb_isKeyPressed(window.glfwInstance, S))
+    if (dkb_isKeyPressed(window.glfwInstance, S) && window.mouseLocked)
     {
       camera.position.z -= 10.f * window.deltaTime;
     }
-    if (dkb_isKeyPressed(window.glfwInstance, A))
+    if (dkb_isKeyPressed(window.glfwInstance, A) && window.mouseLocked)
     {
       camera.position.x += 10.f * window.deltaTime;
     }
-    if (dkb_isKeyPressed(window.glfwInstance, D))
+    if (dkb_isKeyPressed(window.glfwInstance, D) && window.mouseLocked)
     {
       camera.position.x -= 10.f * window.deltaTime;
     }
-    if (dkb_isKeyPressed(window.glfwInstance, Spacebar))
+    if (dkb_isKeyPressed(window.glfwInstance, Spacebar) && window.mouseLocked)
     {
       camera.position.y -= 10.f * window.deltaTime;
     }
-    if (dkb_isKeyPressed(window.glfwInstance, LeftShift))
+    if (dkb_isKeyPressed(window.glfwInstance, LeftShift) && window.mouseLocked)
     {
       camera.position.y += 10.f * window.deltaTime;
     }

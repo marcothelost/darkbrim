@@ -9,6 +9,7 @@
  */
 enum dkb_Key
 {
+  Escape = GLFW_KEY_ESCAPE,
   Spacebar = GLFW_KEY_SPACE,
   LeftShift = GLFW_KEY_LEFT_SHIFT,
   A = GLFW_KEY_A,

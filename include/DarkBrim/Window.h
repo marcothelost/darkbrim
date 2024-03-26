@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 /**
  * @brief Structure representing a window in the DarkBrim engine.
@@ -17,6 +18,7 @@ typedef struct dkb_Window
   float aspect;
   float lastTime;
   float deltaTime;
+  bool mouseLocked;
 } dkb_Window;
 
 /**
@@ -40,5 +42,18 @@ void dkb_updateWindow(dkb_Window* window);
  * @param window Pointer to the dkb_Window structure representing the window to be used.
  */
 void dkb_useWindow(dkb_Window* window);
+
+/**
+ * @brief Locks the mouse cursor within the window's boundaries.
+ * 
+ * @param window Pointer to the dkb_Window structure representing the window.
+ */
+void dkb_lockMouse(dkb_Window* window);
+/**
+ * @brief Unlocks the mouse cursor, allowing it to move freely.
+ * 
+ * @param window Pointer to the dkb_Window structure representing the window.
+ */
+void dkb_unlockMouse(dkb_Window* window);
 
 #endif // DKB_WINDOW_H
