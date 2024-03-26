@@ -1,6 +1,7 @@
 #ifndef DKB_KEYS_H
 #define DKB_KEYS_H
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 

@@ -18,11 +18,12 @@ const unsigned int WINDOW_HEIGHT = 600;
 const char*        WINDOW_TITLE  = "DarkBrim";
 
 // Camera Settings
-const float CAMERA_FOV    = 60.f;
-const float CAMERA_ASPECT = (float)WINDOW_WIDTH / WINDOW_HEIGHT;
-const float CAMERA_NEAR   = 0.1f;
-const float CAMERA_FAR    = 100.f;
-const float CAMERA_SPEED  = 10.f;
+const float CAMERA_FOV         = 60.f;
+const float CAMERA_ASPECT      = (float)WINDOW_WIDTH / WINDOW_HEIGHT;
+const float CAMERA_NEAR        = 0.1f;
+const float CAMERA_FAR         = 100.f;
+const float CAMERA_SPEED       = 10.f;
+const float CAMERA_SENSITIVITY = 0.1f;
 
 // Vertices and Indices
 GLfloat vertices[] = {
@@ -105,13 +106,14 @@ int main()
 
   // Camera
   dkb_Camera camera;
-  dkb_initCamera(&camera, CAMERA_FOV, CAMERA_ASPECT, CAMERA_NEAR, CAMERA_FAR, 10.f);
+  dkb_initCamera(&camera, CAMERA_FOV, CAMERA_ASPECT, CAMERA_NEAR, CAMERA_FAR, CAMERA_SPEED, CAMERA_SENSITIVITY);
 
   // Main Loop
   while (!glfwWindowShouldClose(window.glfwInstance))
   {
     glfwPollEvents();
     dkb_updateWindow(&window);
+    dkb_handleCameraMovement(&window, &camera);
 
     if (dkb_isKeyPressed(window.glfwInstance, E))
     {
@@ -122,49 +124,14 @@ int main()
       dkb_unlockMouse(&window);
     }
 
-    if (dkb_isKeyPressed(window.glfwInstance, W) && window.mouseLocked)
-    {
-      camera.position.z += 10.f * window.deltaTime;
-    }
-    if (dkb_isKeyPressed(window.glfwInstance, S) && window.mouseLocked)
-    {
-      camera.position.z -= 10.f * window.deltaTime;
-    }
-    if (dkb_isKeyPressed(window.glfwInstance, A) && window.mouseLocked)
-    {
-      camera.position.x += 10.f * window.deltaTime;
-    }
-    if (dkb_isKeyPressed(window.glfwInstance, D) && window.mouseLocked)
-    {
-      camera.position.x -= 10.f * window.deltaTime;
-    }
-    if (dkb_isKeyPressed(window.glfwInstance, Spacebar) && window.mouseLocked)
-    {
-      camera.position.y -= 10.f * window.deltaTime;
-    }
-    if (dkb_isKeyPressed(window.glfwInstance, LeftShift) && window.mouseLocked)
-    {
-      camera.position.y += 10.f * window.deltaTime;
-    }
-
     glClear(GL_COLOR_BUFFER_BIT);
     dkb_useShader(&defaultShader);
 
-    dkb_Mat4 model = dkb_mat4(1.f);
-    dkb_Mat4 view = dkb_mat4(1.f);
-    dkb_Mat4 proj = dkb_mat4(1.f);
-    
-    view = dkb_translate_mat4(&view, &camera.position);
-    proj = dkb_projection_mat4(
-      CAMERA_FOV,
-      window.aspect,
-      CAMERA_NEAR,
-      CAMERA_FAR
-    );
+    dkb_updateCameraMatrix(&camera);
+    dkb_applyCameraMatrix(&camera, &defaultShader, "cameraMatrix");
 
+    dkb_Mat4 model = dkb_mat4(1.f);
     dkb_shader_setMat4(&defaultShader, "model", &model);
-    dkb_shader_setMat4(&defaultShader, "view", &view);
-    dkb_shader_setMat4(&defaultShader, "proj", &proj);
 
     dkb_bindVAO(&VAO);
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLuint), GL_UNSIGNED_INT, NULL);

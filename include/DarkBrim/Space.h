@@ -44,6 +44,14 @@ typedef struct dkb_Mat4
 dkb_Vec3 dkb_vec3(const float x, const float y, const float z);
 
 /**
+ * @brief Normalizes a 3-dimensional vector.
+ * 
+ * @param vec Pointer to the dkb_Vec3 structure representing the vector to be normalized.
+ * @return A new dkb_Vec3 structure representing the normalized vector.
+ */
+dkb_Vec3 dkb_normalize_vec3(dkb_Vec3* vec);
+
+/**
  * @brief Adds two 3-dimensional vectors component-wise.
  * 
  * @param vecOne Pointer to the first vector.
@@ -183,5 +191,15 @@ dkb_Mat4 dkb_translate_mat4(dkb_Mat4* mat, dkb_Vec3* vec);
  * @return A dkb_Mat4 structure representing the generated perspective projection matrix.
  */
 dkb_Mat4 dkb_projection_mat4(const float fov, const float aspect, const float zNear, const float zFar);
+/**
+ * @brief Creates a view matrix for a camera positioned at the specified eye point,
+ * looking toward the target point, with the specified up direction.
+ * 
+ * @param eye Pointer to the dkb_Vec3 structure representing the eye position.
+ * @param target Pointer to the dkb_Vec3 structure representing the target position.
+ * @param up Pointer to the dkb_Vec3 structure representing the up direction.
+ * @return A new dkb_Mat4 structure representing the view matrix.
+ */
+dkb_Mat4 dkb_lookAt_mat4(dkb_Vec3* eye, dkb_Vec3* target, dkb_Vec3* up);
 
 #endif // DKB_SPACE_H
